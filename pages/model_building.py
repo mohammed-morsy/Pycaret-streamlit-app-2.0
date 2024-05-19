@@ -244,15 +244,15 @@ def model_metrics():
                     unsafe_allow_html=True)
         st.latex(r"\frac{True_{positive}}{True_{positive}+False_{positive}}")
         
-        st.markdown("<h5 style='color:green;'>Rcall: </h5>",
+        st.markdown("<h5 style='color:#05211b;'>Rcall: </h5>",
                     unsafe_allow_html=True)
         st.latex(r"\frac{True_{positive}}{True_{positive}+False_{negative}}")
         
-        st.markdown("<h5 style='color:green;'>F1 score(Harmonic mean of precision and recall): </h5>",
+        st.markdown("<h5 style='color:#05211b;'>F1 score(Harmonic mean of precision and recall): </h5>",
                     unsafe_allow_html=True)
         st.latex(r"\frac{2*Precision*Recall}{Precision+Recall}")
     
-        st.markdown("<h5 style='color:green;'>Support: The number of occurrences of each class in y_test</h5>",
+        st.markdown("<h5 style='color:#05211b;'>Support: The number of occurrences of each class in y_test</h5>",
                     unsafe_allow_html=True)
         
         
