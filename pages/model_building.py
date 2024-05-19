@@ -36,7 +36,7 @@ def main():
     if ("commit_changes_clicked" not in st.session_state) \
         or (st.session_state.commit_changes_clicked) \
         or ((sorted(st.session_state.selected_columns) != sorted(st.session_state.model.dataset.columns)) \
-            if "selected_columns" in st.session_state else True)
+            if "selected_columns" in st.session_state else True) \
         or (st.session_state.selected_columns.intersection(st.session_state.data) == {}):
         # Update the session state with the currently selected columns.
         st.session_state.selected_columns = set(selected_columns)
