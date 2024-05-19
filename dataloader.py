@@ -1,6 +1,7 @@
 import pandas as pd
-import streamlit as st
 from pycaret.datasets import get_data
+import streamlit as st
+
 
 class DataLoader:
     """
