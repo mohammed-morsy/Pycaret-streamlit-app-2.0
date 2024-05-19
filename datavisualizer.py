@@ -1,8 +1,9 @@
-import seaborn as sns
 import matplotlib.pyplot as plt
-import pandas as pd
-import streamlit as st
 from matplotlib import colormaps
+from pandas.plotting import scatter_matrix
+import seaborn as sns
+import streamlit as st
+
 
 class DataVisualizer:
     """
@@ -95,24 +96,44 @@ class DataVisualizer:
 
 
     def pairplot(self, variables, diagonal="scatter"):
-        axes = pd.plotting.scatter_matrix(self.data[variables], diagonal=diagonal, edgecolor="black", alpha=.7)
+        """
+        Create a pairplot.
+
+        Parameters:
+        - variables (list): List of variables for the pairplot.
+        - diagonal (str): Type of plot for the diagonal subplots. Defaults to "scatter".
+        """
+        axes = scatter_matrix(self.data[variables], diagonal=diagonal, edgecolor="black", alpha=.7)
         return plt.gcf()
 
     @staticmethod
     def covariance_matrix(data):
+        """
+        Create a covariance matrix heatmap.
+
+        Parameters:
+        - data (DataFrame): The dataset to compute the covariance matrix and visualize.
+        """
         cmap = colormaps.get_cmap("twilight")
         fig, ax = plt.subplots()
         sns.heatmap(data.cov(numeric_only=True), annot=True)
         return fig
 
 
-
-
-
 class ModelEvaluation:
-
+    """
+    A class for evaluating machine learning models.
+    """
     @staticmethod
     def confusion_matrix(confusion_matrix, ticks, labels):
+        """
+        Create a confusion matrix plot.
+
+        Parameters:
+        - confusion_matrix (array): Confusion matrix.
+        - ticks (array): Array of tick locations.
+        - labels (array): Array of label names.
+        """
         fig, ax = plt.subplots()
         rotation = len(labels)//5 * 15
         cmap = colormaps.get_cmap("twilight")
@@ -134,6 +155,14 @@ class ModelEvaluation:
         
     @staticmethod
     def classification_report(precision_recall_fscore_support, y_ticks, y_labels):
+        """
+        Create a classification report plot.
+
+        Parameters:
+        - precision_recall_fscore_support (array): Precision, recall, fscore, and support values.
+        - y_ticks (array): Array of tick locations.
+        - y_labels (array): Array of label names.
+        """
         fig, ax = plt.subplots()
         
         x_labels=["Precision", "Recall", "F1 score", "Support"]
@@ -158,6 +187,13 @@ class ModelEvaluation:
 
     @staticmethod
     def hlines(features, feature_names):
+        """
+        Create a horizontal line plot for feature importance.
+
+        Parameters:
+        - features (DataFrame): Features and their importance values.
+        - feature_names (array): Array of feature names.
+        """
         fig, ax = plt.subplots()
         y = range(len(features),0,-1)
         
@@ -174,6 +210,12 @@ class ModelEvaluation:
 
     @staticmethod
     def bar(comparison):
+        """
+        Create a bar plot for model comparison.
+
+        Parameters:
+        - comparison (DataFrame): DataFrame containing model comparison data.
+        """
         fig, ax = plt.subplots()
         comparison.iloc[:,1:].T.plot(kind="barh", ax=ax)
         if (comparison.iloc[:,1:].max(axis=1) - comparison.iloc[:,1:].min(axis=1)/comparison.iloc[:,1:].min(axis=1))\
@@ -183,14 +225,3 @@ class ModelEvaluation:
             lg.set_alpha(.5)
         return fig
 
-
-    
-    
-    
-    
-    
-    
-        
-        
-    
-        
