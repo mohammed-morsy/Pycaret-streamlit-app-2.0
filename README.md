@@ -7,8 +7,8 @@ This project is a Streamlit application for exploratory data analysis (EDA) and 
 1. [`datavisualizer.py`](#2-datavisualizerpy)
 1. [`model_building.py`](#3-model_buildingpy)
 1. [`plot.py`](#4-plotpy)
-1. [`pages/eda.py`](#5-pages/edapy)
-1. [`pages/model_building.py`](#6-pages/model_buildingpy)
+1. [`pages/eda.py`](#5-pagesedapy)
+1. [`pages/model_building.py`](#6-pagesmodel_buildingpy)
 ### 1. `main.py`
 
 #### Main Page
@@ -111,7 +111,7 @@ This Streamlit page allows users to perform exploratory data analysis on uploade
     - Session State Handling
 
 ### 6. `pages/model_building.py`
-
+6-pages/model_buildingpy
 #### Model Building Page
 
 This Streamlit page provides an interactive interface for setting up, building, and evaluating supervised learning models.
