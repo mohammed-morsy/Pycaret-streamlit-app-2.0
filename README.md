@@ -3,12 +3,14 @@
 This project is a Streamlit application for exploratory data analysis (EDA) and supervised learning model building. It allows users to load datasets, visualize data, set up preprocessing parameters, build supervised learning models, and evaluate model performance.
 
 ## Modules
-1. [`main.py`](#1-mainpy)
-1. [`datavisualizer.py`](#2-datavisualizerpy)
-1. [`model_building.py`](#3-model_buildingpy)
-1. [`plot.py`](#4-plotpy)
-1. [`pages/eda.py`](#5-pagesedapy)
-1. [`pages/model_building.py`](#6-pagesmodel_buildingpy)
+1. [**main.py**](#1-mainpy)
+1. [**datavisualizer.py**](#2-datavisualizerpy)
+1. [**model_building.py**](#3-model_buildingpy)
+1. [**plot.py**](#4-plotpy)
+1. [**pages/eda.py**](#5-pagesedapy)
+1. [**pages/model_building.py**](#6-pagesmodel_buildingpy)
+---
+---
 ### 1. `main.py`
 
 #### Main Page
@@ -28,11 +30,10 @@ This Streamlit page serves as the main landing page for the application. It prov
 
 - **Usage**:
     1. Run the Streamlit app.
-    2. Navigate to the "Main" page.
-    3. Click on the navigation links to explore other pages.
-    4. Upload data file (csv, excel, etc.).
-    5. View the preview of the dataset.
-
+    2. Click on the navigation links to explore other pages.
+    3. Upload data file (csv, excel, etc.).
+    4. View the preview of the dataset.
+---
 ### 2. `datavisualizer.py`
 
 #### Data Visualizer Module
@@ -49,6 +50,7 @@ This module provides functions for visualizing data, including histograms, scatt
     - Histogram
     - Scatter Plot
     - Box Plot
+    - Bar plot
     - Pair Plot
     - Heatmap
     - Covariance Matrix
@@ -56,7 +58,7 @@ This module provides functions for visualizing data, including histograms, scatt
     - Classification_report
     - hlines
 
-
+---
 ### 3. `model_building.py`
 
 #### Model Building Module
@@ -79,7 +81,7 @@ This module provides classes and methods for setting up, building, and evaluatin
     - estimator_setter
     - clean_data
     - get_problem_type
-
+---
 ### 4. `plot.py`
 
 #### Plot Module
@@ -93,7 +95,7 @@ This module provides functions for customizing and plotting figures with Streaml
 - **Functions**:
     - plot
     - plot2
-
+---
 ### 5. `pages/eda.py`
 
 #### Exploratory Data Analysis (EDA) Page
@@ -109,9 +111,9 @@ This Streamlit page allows users to perform exploratory data analysis on uploade
     - Data Visualizations
     - Data Summary
     - Session State Handling
-
+---
 ### 6. `pages/model_building.py`
-6-pages/model_buildingpy
+
 #### Model Building Page
 
 This Streamlit page provides an interactive interface for setting up, building, and evaluating supervised learning models.
