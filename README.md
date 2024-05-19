@@ -3,7 +3,7 @@
 This project is a Streamlit application for exploratory data analysis (EDA) and supervised learning model building. It allows users to load datasets, visualize data, set up preprocessing parameters, build supervised learning models, and evaluate model performance.
 
 ## Modules
-1. [`main.py`](#<1. `main.py`>)
+1. [`main.py`](#<"1. `main.py`">)
 1. [`datavisualizer.py`](#3-datavisualizerpy)
 1. [`model_building.py`](#4-model_buildingpy)
 1. [`plot.py`](#5-plotpy)
