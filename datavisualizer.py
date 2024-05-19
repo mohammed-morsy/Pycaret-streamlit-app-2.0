@@ -2,8 +2,6 @@ import matplotlib.pyplot as plt
 from matplotlib import colormaps
 from pandas.plotting import scatter_matrix
 import seaborn as sns
-import streamlit as st
-
 
 class DataVisualizer:
     """
