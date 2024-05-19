@@ -6,6 +6,7 @@ import os
 import sys
 parent = os.getcwd()
 sys.path.append(parent)
+
 from plot import plot2
 
 add_page_title()
@@ -23,17 +24,27 @@ def main():
     target_column = st.sidebar.selectbox(":green[Select the target column:]", 
                                          options=selected_columns,
                                          index=len(selected_columns)-1)
-    tmp_data = st.session_state.data[selected_columns]
+    tmp_data = st.session_state.data[selected_columns].copy()
     
-    if "commit_changes_clicked" not in st.session_state or\
-    (sorted(st.session_state.data.columns) != sorted(st.session_state.model.dataset.columns)):
-        st.session_state.model = ModelBuilding(tmp_data, target_column)
-        st.session_state.commit_changes_clicked = False
+    st.sidebar.button("Commit Changes", on_click=commit_changes_button, use_container_width=True)
     
-    st.sidebar.button(":bold[Commit Changes]", on_click=commit_changes_button, use_container_width=True)
-    if st.session_state.commit_changes_clicked:
+    # Check if any of the following conditions are true:
+    # 1. The 'commit_changes_clicked' flag is not present in the session state (initial state).
+    # 2. The 'commit_changes_clicked' flag is set to True (indicating the user clicked the commit button).
+    # 3. The selected columns have changed (i.e., the currently selected columns are different from the model's dataset columns).
+    #    If 'selected_columns' is not in the session state, default to True to ensure the model rebuilds initially.
+    if ("commit_changes_clicked" not in st.session_state) \
+        or (st.session_state.commit_changes_clicked) \
+        or ((sorted(st.session_state.selected_columns) != sorted(st.session_state.model.dataset.columns)) \
+            if "selected_columns" in st.session_state else True):
+        # Update the session state with the currently selected columns.
+        st.session_state.selected_columns = selected_columns
+        # Rebuild the model with the updated dataset and target column.
         st.session_state.model = ModelBuilding(tmp_data, target_column)
+        # Reset the 'commit_changes_clicked' flag.
         st.session_state.commit_changes_clicked = False
+
+        
 
     if "model" in st.session_state:
         st.markdown(f"""<h3 style='color: #030214;'>Problem Type</h3> 
@@ -41,8 +52,8 @@ def main():
                     unsafe_allow_html=True)
         
         model_setup()
-            
-        if "setup_table" in dir(st.session_state.model):            
+        
+        if "experiment" in dir(st.session_state.model):            
             model_building()
             if "best_model" in dir(st.session_state.model):
                 st.success(":green[Model Building Completed]", icon="✅")
@@ -110,19 +121,8 @@ def model_setup():
         normalize = st.selectbox("Normalize", options=["Yes", "No"], index=1) == "Yes"
         normalize_method = (lambda x: st.selectbox("Normalization method", 
                                             options=["zscore", "minmax", "maxabs", "robust"], 
-                                            index=0) if normalize else "zscore")(normalize)
-                                            
+                                            index=0) if normalize else "zscore")(normalize)      
 
-            
-
-        
-
-            
-    
-    if not(cat_imputation and num_imputation and encoder):
-        st.warning("You must fill all fields in data preprocessing widget")
-        return
-    # Setup PyCaret
     if "experiment" not in  dir(st.session_state.model):
         st.dataframe(st.session_state.model.dataset, use_container_width=True)
     
@@ -175,7 +175,7 @@ def model_building():
     
     # Check if the number of selected models is within the allowed range
     if len(selected_models) < 2 or len(selected_models) > 5:
-        st.warning("Please select between 2 and 3 models.")
+        st.warning("Please select between 2 and 5 models.")
         return
     
 
