@@ -29,10 +29,15 @@ def main():
             st.dataframe(describe, use_container_width=True)
             
             if st.session_state.data.select_dtypes(exclude="object").shape[1] > 1:
+                cov_data = st.session_state.data.select_dtypes(exclude="object")
                 st.markdown("<h3 style='color:#05211b;'>Covariance Matrix</h3>", unsafe_allow_html=True)
-                st.pyplot(DataVisualizer.covariance_matrix(st.session_state.data.select_dtypes(exclude="object")), 
-                          transparent=True, 
-                          edgecolor="black")
+                variables = st.multiselect\
+                ("select variables", cov_data.columns.tolist(),default=cov_data.columns.tolist())
+                if variables:
+                    fig=DataVisualizer.covariance_matrix(cov_data[variables])
+                    st.pyplot(fig, 
+                            transparent=True, 
+                            edgecolor="black")
     
         if st.session_state.data.select_dtypes(include=["object"]).empty:
             st.warning("No categorical columns found.")
